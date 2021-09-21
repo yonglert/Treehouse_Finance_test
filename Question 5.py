@@ -1,5 +1,6 @@
 import os
 import re
+import git
 # Place this python file into the git repo folder
 # Get the current work directory path
 app_folder = os.getcwd()
@@ -32,12 +33,22 @@ app_folder = os.getcwd()
     Assumption:
         1. We will ignore lambda(anonymous) functions. 
 '''
-### Q5d. Find the num
+### Q5d. Find the number of line changes from current version against HEAD~3 (3 generations earlier
+# Call git.diff('HEAD~3') then iterate through to count the number of line changes
 totalFiles = 0
 linesOfComments = 0
 linesOfCode = 0
 numFunctions = 0
 blockComment = False
+changes = 0
+repo = git.Repo(app_folder)
+
+# get the diff between current and "HEAD~3"
+# then iterate through each line and sum the lines that is +
+
+for i in repo.git.diff('HEAD~3').split("\n"):
+    if i.startswith("+") and "+++" not in i:
+        changes += 1
 
 for base, dirs, files in os.walk(app_folder):
     for file in files:
@@ -97,4 +108,4 @@ print(f"Total number of python files: {totalFiles}")
 print(f"Number of lines of code: {linesOfCode}")
 print(f"Number of lines of comments: {linesOfComments}")
 print(f"Number of functions defined: {numFunctions}")
-
+print(f"Number of line changes: {changes}")
