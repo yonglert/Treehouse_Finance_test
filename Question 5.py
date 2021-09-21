@@ -26,9 +26,17 @@ app_folder = os.getcwd()
         2. We do not count inline comments that are written after the line of code
             i.e print('hello world') #this prints the string "hello world" will be considered as a line of code
 '''
+### Q5c. Find numbr of functions defined
+'''
+    Together with 5a and 5b. If it is an indented/non-indented code, check if it starts with "def".
+    Assumption:
+        1. We will ignore lambda(anonymous) functions. 
+'''
+### Q5d. Find the num
 totalFiles = 0
 linesOfComments = 0
 linesOfCode = 0
+numFunctions = 0
 blockComment = False
 
 for base, dirs, files in os.walk(app_folder):
@@ -58,6 +66,9 @@ for base, dirs, files in os.walk(app_folder):
                             else: # indented code
                                 # print(f"indented code: {line}")
                                 linesOfCode += 1
+                                
+                                if line.strip().startswith("def"): # def function():
+                                    numFunctions += 1
                         else: # just spaces in the line => empty line
                             pass
 
@@ -74,6 +85,8 @@ for base, dirs, files in os.walk(app_folder):
                         else:
                             # print(f"code: {line}")
                             linesOfCode += 1
+                            if line.startswith("def "):
+                                numFunctions += 1 # def function():
                             
                     # Empty lines    
                     elif line == "":
@@ -83,4 +96,5 @@ for base, dirs, files in os.walk(app_folder):
 print(f"Total number of python files: {totalFiles}")
 print(f"Number of lines of code: {linesOfCode}")
 print(f"Number of lines of comments: {linesOfComments}")
+print(f"Number of functions defined: {numFunctions}")
 
