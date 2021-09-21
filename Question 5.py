@@ -43,13 +43,37 @@ blockComment = False
 changes = 0
 repo = git.Repo(app_folder)
 
+# helper function to help count number of lines changed
+def countChanges(line):
+    prev_lines = ""
+    current_lines = ""
+    pos_values = [match.start() for match in re.finditer(" ", line)][:3]
+
+    # Get the information of previous version and current version
+    prev = line[pos_values[0]:pos_values[1]]
+    curr = line[pos_values[1]:pos_values[2]]
+
+    # parsing the string to get the starting index for the number of lines
+    prev_start_pos = prev.find(",") + 1
+    curr_start_pos = curr.find(",") + 1
+
+    # slice to get the number of lines at the segment of code for current and previous versions
+    prev_lines = int(prev[prev_start_pos:])
+    curr_lines = int(curr[curr_start_pos:])
+
+    if prev_lines == curr_lines: # change is on the same line
+        return 1
+    else: # count number of lines changed
+        return abs(curr_lines - prev_lines) + 1
+
 # get the diff between current and "HEAD~3"
 # then iterate through each line and sum the lines that is +
+changes = 0
+for i in repo.git.diff('HEAD^').split("\n"):
+    if i.startswith("@@ "):
+        changes += countChanges(i)
 
-for i in repo.git.diff('HEAD~3').split("\n"):
-    if i.startswith("+") and "+++" not in i:
-        changes += 1
-
+        
 for base, dirs, files in os.walk(app_folder):
     for file in files:
         if file.endswith(".py"):
