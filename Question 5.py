@@ -33,14 +33,22 @@ app_folder = os.getcwd()
     Assumption:
         1. We will ignore lambda(anonymous) functions. 
 '''
-### Q5d. Find the number of line changes from current version against HEAD~3 (3 generations earlier
-# Call git.diff('HEAD~3') then iterate through to count the number of line changes
+### Q5d. Find the number of line changes from current version against HEAD~3 (3 generations earlier)
+
+### Q5e. Find file size down to 2-level depth
+'''
+    Using the original iteration, check the current depth and sum the size of each folder.
+'''
+
 totalFiles = 0
 linesOfComments = 0
 linesOfCode = 0
 numFunctions = 0
 blockComment = False
 changes = 0
+depth = 2
+MB = 1048576 # 1 MB = 1048576 Bytes
+totalFolderSize = 0
 repo = git.Repo(app_folder)
 
 # helper function to help count number of lines changed
@@ -68,13 +76,19 @@ def countChanges(line):
 
 # get the diff between current and "HEAD~3"
 # then iterate through each line and sum the lines that is +
-changes = 0
 for i in repo.git.diff('HEAD^').split("\n"):
     if i.startswith("@@ "):
         changes += countChanges(i)
 
         
 for base, dirs, files in os.walk(app_folder):
+    # Find the current depth during os.walk
+    current_depth = base[len(app_folder):].count(os.sep)
+    # if it is above and including 2 level depth:
+    # sum the subfolders' size
+    if current_depth <= depth:
+            for name in dirs:
+                totalFolderSize += os.path.getsize(os.path.join(base,name))
     for file in files:
         if file.endswith(".py"):
             totalFiles += 1
@@ -127,9 +141,13 @@ for base, dirs, files in os.walk(app_folder):
                     elif line == "":
                         # print(f"empty line: {line}")
                         pass
-                            
-print(f"Total number of python files: {totalFiles}")
-print(f"Number of lines of code: {linesOfCode}")
-print(f"Number of lines of comments: {linesOfComments}")
-print(f"Number of functions defined: {numFunctions}")
-print(f"Number of line changes: {changes}")
+
+# Format output to align for better viewing of statistics
+print(
+    f"{'No. of Python Files:':<25} {totalFiles :>10}",
+    f"\n{'No. of lines of code:':<25} {linesOfCode :>10}",
+    f"\n{'No. of lines of comments:':<25} {linesOfComments :>10}",
+    f"\n{'No. of functions defined:':<25} {numFunctions :>10}",
+    f"\n{'No. of lines changed:' :<25} {changes :>10}",
+    f"\n{'Total Folder Size (3 sf):' :<25} {str(round(totalFolderSize/MB,3))+ ' MB':>10}"
+    )
