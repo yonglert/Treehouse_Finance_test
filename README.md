@@ -1,11 +1,11 @@
 # Treehouse_Finance_test
 For technical assessment
 
-### Q1.
+## Q1.
  - a. Sally, Joe and Dan have salaries greater than their immediate managers
  - b. Average salary of employees who do not manage anyone: $425.0
 
-### Q2. 
+## Q2. 
 Python would not be able to run if there is uninitialized variables, it will throw a NameError exception during runtime and hence the function "exists" would not be called.
 
 	solution:
@@ -13,7 +13,7 @@ Python would not be able to run if there is uninitialized variables, it will thr
 	2. If NameError exception is raised: set the variable to None then pass into function "exists"
 	3. Then using the function to print result whether the variable is defined or undefined.
 
-Q3. 
+## Q3. 
     Each number on the Pascal's triangle is a number combination of N take r.
     N is the row number starting from 0; r is the nth number of row N, starting from 0
 
@@ -34,7 +34,7 @@ Q3.
     ------------------------------------------------------------------------------------------
     Runtime: O(N^2)
 
-Q4.
+## Q4.
 - ai. The VaR95% of portfolio as of 2016/12/31 is 0.10586921951621035 or 10.59% (4 sig. fig.) log return loss for 95% confidence.
 - aii. The CVaR95% or Expected Shortfall of portfolio as of 2016/12/31 is 0.17560943012814598 or 17.56% (4 sig fig) log return loss for 95% confidence.
 
@@ -191,38 +191,40 @@ Q4.
 | COST | 0.06       |
 | GS   | 0.12       |
 
-Q5a. Find number of python files
-    Traverse through the folder to find files ending with '.py'.
-    We will not consider .ipynb files in this case. However,
-    if you would like to include counting '.ipynb' files, simply
-    add "file.endswith('.ipynb').
 
-Q5b. Find number of comments and code in all python files 
-    Each file that we traverse that matches ".py", we will iterate through each line
-    Some important things to consider:
-        1. Indented Code vd Indented block comments
-        2. Empty line ("     ") vs New line (\n)
-        3. re.readlines will ignore last line if it is not followed by a newline. Hence we do not use re.readlines
-        4. We will consider inline comments after the line of code as a line of code.
-            i.e for i in range(10): # iterates 10 times, i takes value [0,9]
+## Q5a. Find number of python files
+###	Solution:
+Traverse through the folder to find files ending with '.py'. We will not consider .ipynb files in this case. However, if you would like to include counting '.ipynb' files, simply add "file.endswith('.ipynb').
+
+## Q5b. Find number of comments and code in all python files 
+###	Solution:
+Each file that we traverse that matches ".py", we will iterate through each line
+Some important things to consider:
+1. Indented Code vd Indented block comments
+2. Empty line ("     ") vs New line (\n)
+3. re.readlines will ignore last line if it is not followed by a newline. Hence we do not use re.readlines
+4. We will consider inline comments after the line of code as a line of code.
+	i.e for i in range(10): # iterates 10 times, i takes value [0,9]
         
     Assumption:
         1. We do not count empty/new lines in block comments
         2. We do not count inline comments that are written after the line of code
             i.e print('hello world') #this prints the string "hello world" will be considered as a line of code
 
-Q5c. Find numbr of functions defined
-    Together with 5a and 5b. If it is an indented/non-indented code, check if it starts with "def".
-    Assumption:
-        1. We will ignore lambda(anonymous) functions. 
+## Q5c. Find numbr of functions defined
+###	Solution: 
+Together with 5a and 5b. If it is an indented/non-indented code, check if it starts with "def".
+		
+Assumption:
+1. We will ignore lambda(anonymous) functions. 
 
-Q5d. Find the number of line changes from current version against HEAD~3 (3 generations earlier)
+## Q5d. Find the number of line changes from current version against HEAD~3 (3 generations earlier)
 
-Q5e. Find file size down to 2-level depth
+## Q5e. Find file size down to 2-level depth
 
-    Using the original iteration, check the current depth and sum the size of each folder.
+Using the original iteration, check the current depth and sum the size of each folder.
 
-Q6.   
+## Q6.   
 Method 1: using datefinder
     Input txtfile into function findDates
     datefinder will be able to find all occurrences of dates with different
