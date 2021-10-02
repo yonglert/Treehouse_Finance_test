@@ -35,11 +35,17 @@ Python would not be able to run if there is uninitialized variables, it will thr
     Runtime: O(N^2)
 
 ## Q4.
-- ai. The VaR95% of portfolio as of 2016/12/31 is 0.10586921951621035 or 10.59% (4 sig. fig.) log return loss for 95% confidence.
-- aii. The CVaR95% or Expected Shortfall of portfolio as of 2016/12/31 is 0.17560943012814598 or 17.56% (4 sig fig) log return loss for 95% confidence.
+- ai. The VaR95% of portfolio as of 2016/12/31 is 0.01445269661722914 (14.45%) log return loss or 0.014557641807815047 (14.56%) simple return loss for 95% confidence.
+- aii. The CVaR95% or Expected Shortfall of portfolio as of 2016/12/31 is 2.202% log return loss or 2.227% simple return loss for 95% confidence.
+![picture 1](images/78daeab275193b6390684ef7adbeb1ee33f9390b52fd777253603fcad5f3bd1f.png)  
 
-- bi. The VaR95% of portfolio using Parametric method as of 2016/12/31 is 0.014388648953891615 or 1.44% (4 sig. fig.) log return loss for 95% confidence.
-- bii. The CVaR95% or Expected Shortfall calculated using Parametric method is 0.019275364936903065 or 19.28% (4 sig fig) log return loss for 95% confidence.
+- bi. The VaR95% of portfolio using Parametric method as of 2016/12/31 1.44% log return loss for 95% confidence.
+- bii. The CVaR95% or Expected Shortfall calculated using Parametric method is 19.34% log return loss or 19.53% simple return loss for 95% confidence.
+![picture 2](images/fc1f32571657fad5f661fe44e4e39a8c797d61b4f8d9a77f8d1817e28a8f108e.png)  
+
+### Overall comparison:
+![picture 3](images/f627802d486423d2b48c5351d1da60005855f46f41336152fcbbee8c38ef6c63.png)  
+
 
 - c. 
 	Assumptions:
